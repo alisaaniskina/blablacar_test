@@ -1,0 +1,14 @@
+{
+  "incorrect_separator":
+  {"departure": {"day": "01-09-2018", "hour": "01", "minute": "20"},
+    "backward": {"day": "05.09.2018", "hour": "10", "minute": "40"}},
+  "merged_numbers":
+    {"departure": {"day": "01092018", "hour": "01", "minute": "20"},
+    "backward": {"day": "05092018", "hour": "10", "minute": "40"}},
+  "empty_data_value":
+    {"departure": {"day": "01/09/2018", "minute": "20"},
+    "backward": {"day": "05/09/2018", "hour": "10"}},
+  "empty_time_value":
+    {"departure": {"day": "01/09/2018", "minute": "20"},
+    "backward": {"day": "05/09/2018", "hour": "10"}}
+}

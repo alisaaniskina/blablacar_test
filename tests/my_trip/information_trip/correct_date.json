@@ -1,0 +1,50 @@
+{
+  "all_right": {
+    "departure": {
+        "day": "12/09/2018",
+        "hour": "01",
+        "minute": "20"
+      },
+      "backward": {
+        "day": "13/09/2018",
+        "hour": "10",
+        "minute": "40"
+      }
+    },
+  "shortcut_year":{
+      "departure": {
+        "day": "10/09/18",
+        "hour": "01",
+        "minute": "20"
+      },
+      "backward": {
+        "day": "08/10/18",
+        "hour": "10",
+        "minute": "40"
+      }
+    },
+  "shortcut_year_departure":{
+      "departure": {
+        "day": "10/09/18",
+        "hour": "01",
+        "minute": "20"
+      },
+      "backward": {
+        "day": "08/10/2018",
+        "hour": "10",
+        "minute": "40"
+      }
+    },
+  "shortcut_year_backward": {
+    "departure": {
+      "day": "10/09/2018",
+      "hour": "01",
+      "minute": "20"
+    },
+    "backward": {
+      "day": "08/10/18",
+      "hour": "10",
+      "minute": "40"
+    }
+  }
+}

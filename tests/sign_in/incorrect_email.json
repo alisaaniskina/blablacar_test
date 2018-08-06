@@ -1,0 +1,10 @@
+{
+  "without_at_sign": "test_mail",
+  "without_domain": "test_mail@",
+  "without_user_name": "@mail.ru",
+  "without_symbols_after_domain": "test_mail@mail",
+  "without_symbols_after_dot": "test_mail@mail.",
+  "special_symbols_at_name": ".<>/|!?@mail.ru",
+  "special_symbols_at_domain": "test_mail@.<>/|!?mail.ru",
+  "empty_value": ""
+}
