@@ -3,8 +3,8 @@
   "empty_date_value": [{"hour": "01", "minute": "20"}],
   "empty_hour_value": [{"day": "01/09/2018", "minute": "20"}],
   "empty_minute_value": [{"day": "05/09/2018", "hour": "01", "minute": ""}],
-  "empty_date_minute_value": [{"day": "", "hour": "01", "minute": ""}],
-  "empty_date_hour_value": [{"day": "", "hour": "", "minute": "20"}],
+  "empty_date_minute_value": [{"day": "28092018", "hour": "01", "minute": ""}],
+  "empty_date_hour_value": [{"day": "29/09", "hour": "", "minute": "20"}],
   "other_separator_-": [{"day": "25-09-2018","hour": "01","minute": "20"}],
   "other_separator_:": [{"day": "25:09:2018","hour": "01","minute": "20"}],
   "other_separator_.": [{"day": "25.09.2018","hour": "01","minute": "20"}]

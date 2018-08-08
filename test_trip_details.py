@@ -18,21 +18,20 @@ class TripDetailsTest(TestCase):
         3. Ввести в поле "Откуда выезжаете" корректное значение (например, Новосибирск, Гагаринская)
         4. Ввести в поле "Куда вы едете" корректное значение (например, Барнаул, АлТГУ)
         5. Ввести в поле "Промежуточный пункт" корректное значение (Например, Томск)
-        6. Заполнить поле "Дата отправления" корректными значениями (например, 05/08/2018 18:20)
-        7. Заполнить поле "Дата обратной поездки" корректными значениями (например, 08/08/2018 13:00)
+        6. Заполнить поле "Дата отправления" корректными значениями (например, 05/09/2018 18:20)
+        7. Заполнить поле "Дата обратной поездки" корректными значениями (например, 08/09/2018 13:00)
         8. Нажать кнопку "Продолжить"
     """
 
     place_departure = 'Новосибирск, Гагаринская'
     place_arrival = 'Барнаул, АлТГУ'
     middle_point = ['Томск']
-    date_departure = {"day": "05/08/2018", "hour": "20", "minute": "10"}
-    date_backward = {"day": "15/08/2018", "hour": "18", "minute": "20"}
+    date_departure = {"day": "05/09/2018", "hour": "20", "minute": "10"}
+    date_backward = {"day": "15/09/2018", "hour": "18", "minute": "20"}
 
     def setUp(self):
         profile = webdriver.FirefoxProfile("C:/Users/Алиса/AppData/Roaming/Mozilla/Firefox/Profiles/67v3righ.user")
         self.driver = webdriver.Firefox(profile)
-        # self.driver.implicitly_wait(10)
         self.driver.maximize_window()
         page = HomePage(self.driver)
         page.open("https://www.blablacar.ru/")

@@ -7,15 +7,15 @@ class SignInPage:
 
     @property
     def sign_in_form(self):
-        from sign_in_form import SignInForm
         if self._sign_in_form is None:
+            from sign_in_form import SignInForm
             self._sign_in_form = SignInForm(self.driver)
         return self._sign_in_form
 
     @property
     def header_navigation(self):
-        from header_navigation import HeaderNavigation
         if self._header_navigation is None:
+            from header_navigation import HeaderNavigation
             self._header_navigation = HeaderNavigation(self.driver)
         return self._header_navigation
 

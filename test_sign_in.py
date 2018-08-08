@@ -20,7 +20,6 @@ class SignInTest(TestCase):
     def setUp(self):
         profile = webdriver.FirefoxProfile("C:/Users/Алиса/AppData/Roaming/Mozilla/Firefox/Profiles/67v3righ.user")
         self.driver = webdriver.Firefox(profile)
-        # self.driver.implicitly_wait(10)
         self.driver.maximize_window()
         page = SignInPage(self.driver)
         page.open("https://www.blablacar.ru/register")
@@ -56,6 +55,7 @@ class SignInTest(TestCase):
         self.surname = surname
         self.fill_sign_in_form()
 
+    @unittest.SkipTest
     @file_data('tests/sign_in/incorrect_email.json')
     def test_incorrect_email(self, email):
         self.errors = [INCORRECT_EMAIL]
