@@ -11,14 +11,15 @@ from trip_details_page import TripDetailsPage
 @ddt
 class TripInformationTest(TestCase):
     errors = []
+    middle_point = []
     place_departure = 'Новосибирск, Гагаринская'
     place_arrival = 'Барнаул, АлТГУ'
-    date_departure = {"day": "05/08/2018", "hour": "20", "minute": "10"}
-    date_backward = {"day": "15/08/2018", "hour": "18", "minute": "20"}
+    date_departure = {"day": "05/09/2018", "hour": "20", "minute": "10"}
+    date_backward = {"day": "15/09/2018", "hour": "18", "minute": "20"}
 
     def setUp(self):
-        profile = webdriver.FirefoxProfile("C:/Users/Алиса/AppData/Roaming/Mozilla/Firefox/Profiles/67v3righ.user")
-        self.driver = webdriver.Firefox(profile)
+        # profile = webdriver.FirefoxProfile("C:/Users/Алиса/AppData/Roaming/Mozilla/Firefox/Profiles/67v3righ.user")
+        self.driver = webdriver.Firefox()
         self.driver.maximize_window()
         page = MyTripPage(self.driver)
         page.open("https://www.blablacar.ru/offer-seats/1")
@@ -26,6 +27,7 @@ class TripInformationTest(TestCase):
     def fill_information_form(self):
         page = MyTripPage(self.driver)
         page.trip_information_form.fill_places(self.place_departure, self.place_arrival)
+        page.trip_information_form.fill_middle_point(self.middle_point)
         page.trip_information_form.date_departure(self.date_departure)
         page.trip_information_form.date_backward(self.date_backward)
         page.trip_information_form.next_step()
@@ -79,9 +81,10 @@ class TripInformationTest(TestCase):
         self.errors = [INCORRECT_INPUT, INCORRECT_DATE_DEPARTURE, INCORRECT_DATE_BACKWARD]
         self.date_departure = departure
         self.date_backward = backward
+        self.fill_information_form()
 
+    @file_data('tests/my_trip/information_trip/correct_place.json')
     def test_correct_place(self, departure, arrival):
-        print(departure, arrival)
         city_in = ['Новосибирск', 'Барнаул']
         self.place_departure = departure
         self.place_arrival = arrival
@@ -105,6 +108,12 @@ class TripInformationTest(TestCase):
         self.errors = [ERROR_CREATE_ROUTE, INCORRECT_POINT, INCORRECT_POINT, INCORRECT_INPUT]
         self.place_departure = 'Эъхрпшй'
         self.place_arrival = 'Йшпрхъэ'
+        self.fill_information_form()
+
+    # -
+    def test_incorrect_middle_point(self):
+        self.errors = [INCORRECT_INPUT, INCORRECT_POINT]
+        self.middle_point = ['Эъхрпшй']
         self.fill_information_form()
 
     def test_empty_departure_place(self):
