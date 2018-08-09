@@ -14,8 +14,6 @@ class MyTripPage:
 
     @property
     def header_navigation(self):
-        # нужно перенести инициализацию модели в тот момент, когда её нет
-        # иначе на каждом вызове метода происходит подключение импорта
         if self._header_navigation is None:
             from header_navigation import HeaderNavigation
             self._header_navigation = HeaderNavigation(self.driver)
