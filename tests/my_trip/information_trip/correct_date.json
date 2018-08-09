@@ -47,14 +47,14 @@
       "minute": "40"
     }
   },
-  "shortcut_year_next_day": {
+  "shortcut_year_backward_next_day": {
     "departure": {
       "day": "10/09/2018",
       "hour": "01",
       "minute": "20"
     },
     "backward": {
-      "day": "11/10/18",
+      "day": "11/09/18",
       "hour": "10",
       "minute": "40"
     }
