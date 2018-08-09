@@ -62,6 +62,16 @@ class TripInformationTest(TestCase):
         self.date_backward = date[0]
         self.fill_information_form()
 
+    def test_empty_date_departure(self):
+        self.errors = [INCORRECT_INPUT, ERROR_EMPTY_DATE_DEPARTURE]
+        self.date_departure = {"day": "", "hour": "", "minute": ""}
+        self.fill_information_form()
+
+    def test_empty_date_backward(self):
+        self.errors = [INCORRECT_INPUT, ERROR_EMPTY_DATE_BACKWARD]
+        self.date_backward = {"day": "", "hour": "", "minute": ""}
+        self.fill_information_form()
+
     @file_data('tests/my_trip/information_trip/non_actual_date_departure.json')
     def test_non_actual_date_departure(self, departure, backward):
         self.errors = [INCORRECT_INPUT, NON_ACTUAL_DATE_DEPARTURE]
