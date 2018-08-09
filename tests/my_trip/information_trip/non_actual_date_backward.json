@@ -1,13 +1,13 @@
 {
   "shortcut_year":
-    {"departure": {"day": "12/09/2018", "hour": "01", "minute": "20"},
-    "backward": {"day": "13/09/18", "hour": "10", "minute": "40"}},
+    {"departure": {"day": "12/09/18", "hour": "01", "minute": "20"},
+    "backward": {"day": "11/09/18", "hour": "10", "minute": "40"}},
   "backward_date_earlier_current":
     {"departure": {"day": "25/09/18", "hour": "01", "minute": "20"},
     "backward": {"day": "01/07/18", "hour": "10", "minute": "40"}},
   "backward_day_earlier_departure":
     {"departure": {"day": "10/09/18", "hour": "01", "minute": "20"},
-    "backward": {"day": "08/06/18", "hour": "10", "minute": "40"}},
+    "backward": {"day": "08/09/18", "hour": "10", "minute": "40"}},
   "backward_hour_earlier_departure":
      {"departure": {"day": "28/09/2018", "hour": "10", "minute": "20"},
      "backward": {"day": "28/09/2018", "hour": "09", "minute": "40"}},
