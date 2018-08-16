@@ -2,6 +2,7 @@ from ddt import ddt, file_data
 import unittest
 from unittest import TestCase
 from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
 
 from names import *
 from home_page import HomePage
@@ -30,8 +31,10 @@ class TripDetailsTest(TestCase):
     date_backward = {"day": "15/09/2018", "hour": "18", "minute": "20"}
 
     def setUp(self):
-        profile = webdriver.FirefoxProfile("C:/Users/Алиса/AppData/Roaming/Mozilla/Firefox/Profiles/67v3righ.user")
-        self.driver = webdriver.Firefox(profile)
+        # profile = webdriver.FirefoxProfile("C:/Users/Алиса/AppData/Roaming/Mozilla/Firefox/Profiles/67v3righ.user")
+        options = Options()
+        options.add_argument('-headless')
+        self.driver = webdriver.Firefox(options=options)
         self.driver.maximize_window()
         page = HomePage(self.driver)
         page.open("https://www.blablacar.ru/")

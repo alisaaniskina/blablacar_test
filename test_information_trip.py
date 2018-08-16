@@ -6,6 +6,7 @@ from selenium import webdriver
 from names import *
 from my_trip_page import MyTripPage
 from trip_details_page import TripDetailsPage
+from selenium.webdriver.firefox.options import Options
 
 
 @ddt
@@ -19,7 +20,9 @@ class TripInformationTest(TestCase):
 
     def setUp(self):
         # profile = webdriver.FirefoxProfile("C:/Users/Алиса/AppData/Roaming/Mozilla/Firefox/Profiles/67v3righ.user")
-        self.driver = webdriver.Firefox()
+        options = Options()
+        options.add_argument('-headless')
+        self.driver = webdriver.Firefox(options=options)
         self.driver.maximize_window()
         page = MyTripPage(self.driver)
         page.open("https://www.blablacar.ru/offer-seats/1")

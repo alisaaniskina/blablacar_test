@@ -2,6 +2,7 @@ import unittest
 from unittest import TestCase
 from selenium import webdriver
 from ddt import ddt, file_data
+from selenium.webdriver.firefox.options import Options
 
 from names import *
 from sign_in_page import SignInPage
@@ -18,8 +19,10 @@ class SignInTest(TestCase):
     password = {"password": "Pa$sw0rd", "confirm": "Pa$sw0rd"}
 
     def setUp(self):
-        profile = webdriver.FirefoxProfile("C:/Users/Алиса/AppData/Roaming/Mozilla/Firefox/Profiles/67v3righ.user")
-        self.driver = webdriver.Firefox(profile)
+        # profile = webdriver.FirefoxProfile("C:/Users/Алиса/AppData/Roaming/Mozilla/Firefox/Profiles/67v3righ.user")
+        options = Options()
+        options.add_argument('-headless')
+        self.driver = webdriver.Firefox(options=options)
         self.driver.maximize_window()
         page = SignInPage(self.driver)
         page.open("https://www.blablacar.ru/register")
