@@ -5,7 +5,6 @@ from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 
 from names import *
-from home_page import HomePage
 from my_trip_page import MyTripPage
 from trip_details_page import TripDetailsPage
 
@@ -24,6 +23,8 @@ class TripDetailsTest(TestCase):
         8. Нажать кнопку "Продолжить"
     """
 
+    errors = []
+    prices = []
     place_departure = 'Новосибирск, Гагаринская'
     place_arrival = 'Барнаул, АлТГУ'
     middle_point = ['Томск']
@@ -35,11 +36,10 @@ class TripDetailsTest(TestCase):
         options = Options()
         options.add_argument('-headless')
         self.driver = webdriver.Firefox(options=options)
+        # self.driver = webdriver.Firefox()
         self.driver.maximize_window()
-        page = HomePage(self.driver)
-        page.open("https://www.blablacar.ru/")
-        page.header_navigation.go_to_offer_trip()
         page = MyTripPage(self.driver)
+        page.open("https://www.blablacar.ru/offer-seats/1")
         page.trip_information_form.fill_places(self.place_departure, self.place_arrival)
         page.trip_information_form.fill_middle_point(self.middle_point)
         page.trip_information_form.date_departure(self.date_departure)
@@ -48,44 +48,52 @@ class TripDetailsTest(TestCase):
 
     @file_data('tests/my_trip/trip_details/maximal_price.json')
     def test_maximal_price_by_passenger(self, price):
-        expected_prices = ['550', '950']
+        self.prices = ['500', '950']
         page = TripDetailsPage(self.driver)
         page.trip_details_form.price_by_passengers(price)
-        actual_prices = page.trip_details_form.get_price_by_route()
-        self.assertSequenceEqual(expected_prices, actual_prices)
+        page.trip_details_form.agree_policy()
+        prices = page.trip_details_form.get_price_by_route()
+        self.assertListEqual(self.prices, prices)
 
     @file_data('tests/my_trip/trip_details/minimal_price.json')
     def test_minimal_price_by_passenger(self, price):
-        expected_prices = ['160', '300']
+        self.prices = ['160', '300']
         page = TripDetailsPage(self.driver)
         page.trip_details_form.price_by_passengers(price)
-        actual_prices = page.trip_details_form.get_price_by_route()
-        self.assertSequenceEqual(expected_prices, actual_prices)
+        page.trip_details_form.agree_policy()
+        prices = page.trip_details_form.get_price_by_route()
+        self.assertListEqual(self.prices, prices)
+
+    def test_empty_price_by_passenger(self):
+        self.prices = ['350', '600']
+        page = TripDetailsPage(self.driver)
+        page.trip_details_form.price_by_passengers(['', ''])
+        page.trip_details_form.agree_policy()
+        prices = page.trip_details_form.get_price_by_route()
+        self.assertListEqual(self.prices, prices)
 
     def test_not_confirm_drivers_license(self):
-        expected_errors = [INCORRECT_INPUT, ERROR_CONFIRM_DRIVERS_LICENSE]
+        self.errors = [INCORRECT_INPUT, ERROR_CONFIRM_DRIVERS_LICENSE]
         page = TripDetailsPage(self.driver)
         page.trip_details_form.next_step()
-        actual_errors = page.trip_details_form.get_all_errors()
-        self.assertSequenceEqual(expected_errors, actual_errors)
+        errors = page.trip_details_form.get_all_errors()
+        self.assertListEqual(self.errors, errors)
 
     def test_count_seats_more_allowable(self):
-        expected_errors = [INCORRECT_INPUT, ERROR_COUNT_SEATS_MORE_ALLOWABLE]
         page = TripDetailsPage(self.driver)
         page.trip_details_form.free_seats(9)
-        page.trip_details_form.next_step()
-        actual_errors = page.trip_details_form.get_all_errors()
-        self.assertSequenceEqual(expected_errors, actual_errors)
+        page.trip_details_form.confirm_advice()
+        page.trip_details_form.agree_policy()
+        seats = page.trip_details_form.get_count_free_seats()
+        self.assertEqual(seats, '5')
 
-    # -
     @file_data('tests/my_trip/trip_details/less_count_seats.json')
-    def test_count_seats_less_allowable(self, count_seats):
-        expected_errors = [INCORRECT_INPUT, ERROR_COUNT_SEATS_LESS_ALLOWABLE]
+    def test_count_seats_less_allowable(self, seat_count):
         page = TripDetailsPage(self.driver)
-        page.trip_details_form.free_seats(count_seats)
-        page.trip_details_form.next_step()
-        actual_errors = page.trip_details_form.get_all_errors()
-        self.assertSequenceEqual(expected_errors, actual_errors)
+        page.trip_details_form.free_seats(seat_count)
+        page.trip_details_form.agree_policy()
+        seats = page.trip_details_form.get_count_free_seats()
+        self.assertEqual(seats, '1')
 
     def tearDown(self):
         self.driver.quit()
