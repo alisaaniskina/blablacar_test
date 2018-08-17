@@ -35,7 +35,7 @@ class TripInformationTest(TestCase):
         page.trip_information_form.date_backward(self.date_backward)
         page.trip_information_form.next_step()
         errors = page.trip_information_form.get_all_errors()
-        self.assertSequenceEqual(self.errors, errors)
+        self.assertListEqual(self.errors, errors)
 
     # -
     @file_data('tests/my_trip/information_trip/correct_date.json')
