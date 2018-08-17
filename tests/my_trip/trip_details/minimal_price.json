@@ -1,7 +1,6 @@
 {
-  "empty_value": ["", ""],
   "zero_value": ["0", "0"],
   "negative_value": ["-1", "-100"],
   "minimal_value": ["25", "100"],
-  "limit_value": ["160", "300"]
+  "limit_value": ["150", "290"]
 }

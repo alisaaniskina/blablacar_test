@@ -1,4 +1,4 @@
 {
-  "limit_value": "9",
-  "maximal_value": "10"
+  "zero_value": "0",
+  "negative_value": "-1"
 }
