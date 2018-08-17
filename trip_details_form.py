@@ -1,4 +1,9 @@
 from base_component import BaseComponent
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class TripDetailsForm(BaseComponent):
@@ -17,16 +22,30 @@ class TripDetailsForm(BaseComponent):
         'term_of_use': '//label[@id="new_publication_step2_cgu"]/a[1]',
         'privacy_policy': '//label[@id="new_publication_step2_cgu"]/a[2]',
         'price': '//input[@id="new_publication_step2_prices_%s"]',
-        'errors': '//p[@class="alert alert-error no-icon u-clearfix js-formError _test-formError "]'
+        'errors': '//p[@class="alert alert-error no-icon u-clearfix js-formError _test-formError "]',
+        'modal_window': '//div[@id="passengersWarningModal"]',
+        'confirm_advice': '//div[@id="passengersWarningModal"]/div[3]/button'
     }
 
+    # возвращает список цен на маршруты
     def get_price_by_route(self):
         prices = []
         routes = len(self.driver.find_elements_by_xpath(self.selectors['list_routes']))
         for count in range(routes):
-            price = self.driver.find_element_by_xpath(self.selectors['price'] % count).get_attribute("value")
+            price = self.driver.find_element_by_xpath(self.selectors['price'] % count).get_attribute('value')
             prices.append(price)
         return prices
+
+    # возвращает установленное в форме количество свободных мест
+    def get_count_free_seats(self):
+        seats = self.driver.find_element_by_xpath(self.selectors['seat_count'])
+        return seats.get_attribute('value')
+
+    # вручную очищает поле ввода цены
+    @staticmethod
+    def clear_text(element):
+        length = len(element.get_attribute('value'))
+        element.send_keys(length * Keys.BACKSPACE)
 
     # получение всех городов из списка всех маршрутов
     def get_points_routes(self):
@@ -41,17 +60,27 @@ class TripDetailsForm(BaseComponent):
         # собираются все строки, содержащие маршруты
         routes = len(self.driver.find_elements_by_xpath(self.selectors['list_routes']))
         for count in range(routes):
-            self.driver.find_element_by_xpath(self.selectors['price'] % count).send_keys(prices[count])
+            price = self.driver.find_element_by_xpath(self.selectors['price'] % count)
+            TripDetailsForm.clear_text(price)
+            price.send_keys(prices[count])
+            action = ActionChains(self.driver)
+            action.move_to_element(price).move_by_offset(80, 80).click().perform()
 
     # заполнение значения свободных мест
     def free_seats(self, seat_count):
         seat = self.driver.find_element_by_xpath(self.selectors['seat_count'])
-        seat.clear()
+        TripDetailsForm.clear_text(seat)
         seat.send_keys(seat_count)
-        # seat.submit()
-        # confirm = WebDriverWait(self.driver, 10).until(
-        #     EC.presence_of_element_located((By.XPATH, '//button[@class="Button u-blue-bg"]')))
-        # confirm.click()
+        action = ActionChains(self.driver)
+        action.move_to_element(seat).move_by_offset(80, 80).click().perform()
+
+    # подтверждение условия провоза не более 5 пассажиров
+    def confirm_advice(self):
+        wait = WebDriverWait(self.driver, 5)
+        wait.until(
+            EC.visibility_of_element_located((By.XPATH, self.selectors['modal_window']))
+        ).click()
+        self.driver.find_element_by_xpath(self.selectors['confirm_advice']).click()
 
     # выбор/снятие выбора "Максимум два пассажира на заднем сиденье"
     def guarantee_back_seat(self):
