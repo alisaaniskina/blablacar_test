@@ -97,8 +97,9 @@ class TripDetailsForm(BaseComponent):
         self.driver.find_element_by_xpath(self.selectors['comment_backward']).send_keys(comment)
 
     # снятие выбора/выбор "Условия пользовательского соглашения"
-    def agree_policy(self, ):
-        self.driver.find_element_by_xpath(self.selectors['agree_terms']).click()
+    def agree_policy(self):
+        wait = WebDriverWait(self.driver, 5)
+        wait.until(EC.presence_of_element_located((By.XPATH, self.selectors['agree_terms']))).click()
 
     # подтверждение отправки формы, кнопка "Продолжить"
     def next_step(self):
