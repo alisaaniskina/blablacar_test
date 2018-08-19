@@ -1,5 +1,6 @@
-from ddt import ddt, file_data
 import unittest
+import xmlrunner
+from ddt import ddt, file_data
 from unittest import TestCase
 from selenium import webdriver
 
@@ -148,5 +149,7 @@ class TripInformationTest(TestCase):
     def tearDown(self):
         self.driver.quit()
 
-    if __name__ == '__main__':
-        unittest.main()
+
+if __name__ == '__main__':
+    unittest.main(
+        testRunner=xmlrunner.XMLTestRunner(output='reports'))
