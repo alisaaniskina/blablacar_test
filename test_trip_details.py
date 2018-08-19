@@ -1,5 +1,6 @@
-from ddt import ddt, file_data
 import unittest
+import xmlrunner
+from ddt import ddt, file_data
 from unittest import TestCase
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
@@ -32,11 +33,9 @@ class TripDetailsTest(TestCase):
     date_backward = {"day": "15/09/2018", "hour": "18", "minute": "20"}
 
     def setUp(self):
-        # profile = webdriver.FirefoxProfile("C:/Users/Алиса/AppData/Roaming/Mozilla/Firefox/Profiles/67v3righ.user")
         options = Options()
         options.add_argument('-headless')
         self.driver = webdriver.Firefox(options=options)
-        # self.driver = webdriver.Firefox()
         self.driver.maximize_window()
         page = MyTripPage(self.driver)
         page.open("https://www.blablacar.ru/offer-seats/1")
@@ -98,5 +97,7 @@ class TripDetailsTest(TestCase):
     def tearDown(self):
         self.driver.quit()
 
-    if __name__ == '__main__':
-        unittest.main()
+
+if __name__ == '__main__':
+    unittest.main(
+        testRunner=xmlrunner.XMLTestRunner(output='reports'))
