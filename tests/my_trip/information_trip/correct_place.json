@@ -1,20 +1,20 @@
 {
   "error_in_departure_city":
-    {"departure": "Новосиибрск, Гагаринская",
-      "arrival": "Барнаул, АлТГУ"},
+    {"departure": "РќРѕРІРѕСЃРёРёР±СЂСЃРє, Р“Р°РіР°СЂРёРЅСЃРєР°СЏ",
+      "arrival": "Р‘Р°СЂРЅР°СѓР», РђР»РўР“РЈ"},
   "error_in_arrival_city":
-    {"departure": "Новосибирск, Гагаринская",
-      "arrival": "Барннул, АлТГУ"},
+    {"departure": "РќРѕРІРѕСЃРёР±РёСЂСЃРє, Р“Р°РіР°СЂРёРЅСЃРєР°СЏ",
+      "arrival": "Р‘Р°СЂРЅРЅСѓР», РђР»РўР“РЈ"},
    "error_in_departure_place":
-    {"departure": "Новосибирск, Гагааинская",
-      "arrival": "Барнаул, АлТГУ"},
+    {"departure": "РќРѕРІРѕСЃРёР±РёСЂСЃРє, Р“Р°РіР°Р°РёРЅСЃРєР°СЏ",
+      "arrival": "Р‘Р°СЂРЅР°СѓР», РђР»РўР“РЈ"},
   "error_in_arrival_place":
-    {"departure": "Новосибирск, Гагаринская",
-      "arrival": "Баранул, АлТ"},
+    {"departure": "РќРѕРІРѕСЃРёР±РёСЂСЃРє, Р“Р°РіР°СЂРёРЅСЃРєР°СЏ",
+      "arrival": "Р‘Р°СЂР°РЅСѓР», РђР»Рў"},
   "place_in_english":
     {"departure": "Novosibirsk, Gagarinskaya",
       "arrival": "Barnaul, AlTGU"},
   "city_without_place":
-   {"departure": "Новосибирск",
-      "arrival": "Барнаул"}
+   {"departure": "РќРѕРІРѕСЃРёР±РёСЂСЃРє",
+      "arrival": "Р‘Р°СЂРЅР°СѓР»"}
 }
